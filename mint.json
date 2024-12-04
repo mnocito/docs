@@ -9,7 +9,7 @@
     "default": "light",
     "isHidden": true
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.webp",
   "colors": {
     "primary": "#0D9373",
     "light": "#07C983",
@@ -28,6 +28,10 @@
       "url": "mailto:founders@simplex.sh"
     }
   ],
+  "topbarCtaButton": {
+    "name": "Request API Key",
+    "url": "https://simplex.sh/request-api-key"
+  },
   "anchors": [
 
   ],
@@ -48,11 +52,8 @@
       "group": "Python SDK",
       "pages": [
         "python-sdk/introduction",
-        "python-sdk/code",
-        "python-sdk/images",
-        "python-sdk/settings",
-        "python-sdk/navigation",
-        "python-sdk/reusable-snippets"
+        "python-sdk/agent",
+        "python-sdk/browser-actor"
       ]
     }
   ],

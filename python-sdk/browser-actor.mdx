@@ -12,7 +12,7 @@ The BrowserActor is part of the Python SDK. Make sure you have installed the pac
 
 ## Usage
 
-\```python
+```python
 from browseractor import BrowserActor
 
 # Initialize browser (headless by default)
@@ -26,7 +26,7 @@ screenshot = browser.take_screenshot()
 
 # Clean up when done
 browser.close()
-\```
+```
 
 ## Constructor
 
@@ -46,10 +46,10 @@ browser.close()
 
 Returns whether a recording is available.
 
-\```python
+```python
 if browser.has_recording:
     recording_data = browser.recording_data
-\```
+```
 
 ### recording_data
 
@@ -77,9 +77,9 @@ Navigate to a specified URL.
   The URL to navigate to
 </ParamField>
 
-\```python
+```python
 browser.navigate("https://example.com")
-\```
+```
 
 ### take_screenshot(full_page)
 
@@ -89,29 +89,29 @@ Takes and returns a screenshot of the current page.
   If True, captures the full scrollable page. If False, captures only the current viewport.
 </ParamField>
 
-\```python
+```python
 # Take viewport screenshot
 screenshot = browser.take_screenshot()
 
 # Take full page screenshot
 full_screenshot = browser.take_screenshot(full_page=True)
-\```
+```
 
 ### new_page()
 
 Creates a new page and closes the existing one if present.
 
-\```python
+```python
 browser.new_page()
-\```
+```
 
 ### close()
 
 Cleans up all browser resources and saves recording if enabled.
 
-\```python
+```python
 browser.close()
-\```
+```
 
 ### execute(interaction)
 
@@ -129,7 +129,7 @@ Supported actions:
 - `HOVER`: Hover over specific coordinates
 - `WAIT`: Wait for a specified duration
 
-\```python
+```python
 from lib.enums import BrowserAction, BrowserInteraction
 
 # Create and execute a navigation interaction
@@ -145,15 +145,15 @@ interaction = BrowserInteraction(
     coordinates=(100, 200)
 )
 browser.execute(interaction)
-\```
+```
 
 ## Error Handling
 
 The `execute()` method will raise a `ValueError` if the interaction is missing required data for the specified action.
 
-\```python
+```python
 try:
     browser.execute(interaction)
 except ValueError as e:
     print(f"Invalid interaction: {e}")
-\```
+```

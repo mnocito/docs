@@ -12,7 +12,7 @@ The Simplex agent is part of the Python SDK. Make sure you have installed the pa
 
 ## Usage
 
-\```python
+```python
 from browser import Simplex
 from PIL import Image
 
@@ -35,7 +35,7 @@ for action in next_actions:
 
 # Clean up when done
 agent.close()
-\```
+```
 
 ## Constructor
 
@@ -79,13 +79,13 @@ Analyzes the current webpage state and determines the next actions to take to ac
 
 Returns a tuple of `(List[BrowserInteraction], bool)` containing the next actions to take and whether the task is complete.
 
-\```python
+```python
 screenshot = agent.actor.take_screenshot()
 next_actions, is_complete = agent.get_next_steps(
     "Fill out the contact form", 
     screenshot
 )
-\```
+```
 
 ### execute_interaction(interaction)
 
@@ -95,7 +95,7 @@ Executes a single browser interaction and updates the interaction history.
   The browser interaction to execute
 </ParamField>
 
-\```python
+```python
 from lib.enums import BrowserAction, BrowserInteraction
 
 interaction = BrowserInteraction(
@@ -103,7 +103,7 @@ interaction = BrowserInteraction(
     coordinates=(100, 200)
 )
 agent.execute_interaction(interaction)
-\```
+```
 
 ### navigate(url)
 
@@ -113,9 +113,9 @@ Navigates to a specified URL.
   The URL to navigate to
 </ParamField>
 
-\```python
+```python
 agent.navigate("https://example.com")
-\```
+```
 
 ### find_element(interaction, screenshot)
 
@@ -131,30 +131,30 @@ Locates an element on the page based on its description using computer vision.
 
 Returns a `BrowserInteraction` with updated coordinates for the found element.
 
-\```python
+```python
 interaction = BrowserInteraction(
     action=BrowserAction.CLICK,
     description="Login button"
 )
 screenshot = agent.actor.take_screenshot()
 interaction_with_coords = agent.find_element(interaction, screenshot)
-\```
+```
 
 ### close()
 
 Cleans up browser resources and stops the agent.
 
-\```python
+```python
 agent.close()
-\```
+```
 
 ## Error Handling
 
 The agent will raise various exceptions for invalid interactions or when elements cannot be found:
 
-\```python
+```python
 try:
     agent.execute_interaction(interaction)
 except ValueError as e:
     print(f"Invalid interaction: {e}")
-\```
+```

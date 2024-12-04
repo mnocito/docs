@@ -63,12 +63,7 @@
     {
       "group": "API Documentation",
       "pages": [
-        "api-reference/introduction"
-      ]
-    },
-    {
-      "group": "Endpoints",
-      "pages": [
+        "api-reference/introduction",
         "api-reference/endpoint/find_element",
         "api-reference/endpoint/get_next_step",
         "api-reference/endpoint/step_to_action"

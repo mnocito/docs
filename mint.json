@@ -11,12 +11,12 @@
   },
   "favicon": "/favicon.webp",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "primary": "#4A90E2",
+    "light": "#A9C4EB",
+    "dark": "#1C3D5A",
     "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
+      "from": "#4A90E2",
+      "to": "#A9C4EB"
     },
     "background": {
       "light": "#f8f8f5"
@@ -39,6 +39,7 @@
     {
       "group": "",
       "pages": [
+        "introduction",
         "quickstart"
       ]
     },
@@ -52,11 +53,29 @@
       "group": "Python SDK",
       "pages": [
         "python-sdk/introduction",
-        "python-sdk/agent",
+        "python-sdk/find_element",
+        "python-sdk/get_next_step",
+        "python-sdk/step_to_action",
+        "python-sdk/browser-interaction",
         "python-sdk/browser-actor"
+      ]
+    },
+    {
+      "group": "API Documentation",
+      "pages": [
+        "api-reference/introduction"
+      ]
+    },
+    {
+      "group": "Endpoints",
+      "pages": [
+        "api-reference/endpoint/find_element",
+        "api-reference/endpoint/get_next_step",
+        "api-reference/endpoint/step_to_action"
       ]
     }
   ],
+  
   "footerSocials": {
     "x": "https://x.com/SimplexData",
     "linkedin": "https://www.linkedin.com/company/simplex-data"

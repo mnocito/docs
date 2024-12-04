@@ -1,0 +1,160 @@
+---
+title: 'step_to_action'
+description: 'AI-powered browser automation agent'
+icon: 'code'
+---
+
+The `Simplex` class provides an intelligent browser automation agent that can understand and execute high-level tasks by breaking them down into browser interactions.
+
+## Installation
+
+The Simplex agent is part of the Python SDK. Make sure you have installed the package as described in the [quickstart guide](/quickstart).
+
+## Usage
+
+```python
+from browser import Simplex
+from PIL import Image
+
+# Initialize Simplex agent
+agent = Simplex(headless=True, record_video=False)
+
+# Navigate to a website
+agent.navigate("https://example.com")
+
+# Execute a high-level task
+screenshot = agent.actor.take_screenshot()
+next_actions, is_complete = agent.get_next_steps(
+    "Click the login button and enter username 'test'", 
+    screenshot
+)
+
+# Execute the actions
+for action in next_actions:
+    agent.execute_interaction(action)
+
+# Clean up when done
+agent.close()
+```
+
+## Constructor
+
+### Parameters
+
+<ParamField path="headless" type="boolean" default="True">
+  Whether to run browser in headless mode
+</ParamField>
+
+<ParamField path="record_video" type="boolean" default="False">
+  Enable video recording of browser interactions
+</ParamField>
+
+## Properties
+
+### has_recording
+
+Returns whether a recording is available.
+
+### recording_data
+
+Returns the cached recording data as bytes if available.
+
+### history
+
+Returns the list of executed browser interactions grouped by task.
+
+## Methods
+
+### get_next_steps(high_level_task, screenshot)
+
+Analyzes the current webpage state and determines the next actions to take to accomplish a high-level task.
+
+<ParamField path="high_level_task" type="string" required>
+  Natural language description of the task to accomplish
+</ParamField>
+
+<ParamField path="screenshot" type="PIL.Image" required>
+  Screenshot of the current webpage state
+</ParamField>
+
+Returns a tuple of `(List[BrowserInteraction], bool)` containing the next actions to take and whether the task is complete.
+
+```python
+screenshot = agent.actor.take_screenshot()
+next_actions, is_complete = agent.get_next_steps(
+    "Fill out the contact form", 
+    screenshot
+)
+```
+
+### execute_interaction(interaction)
+
+Executes a single browser interaction and updates the interaction history.
+
+<ParamField path="interaction" type="BrowserInteraction" required>
+  The browser interaction to execute
+</ParamField>
+
+```python
+from lib.enums import BrowserAction, BrowserInteraction
+
+interaction = BrowserInteraction(
+    action=BrowserAction.CLICK,
+    coordinates=(100, 200)
+)
+agent.execute_interaction(interaction)
+```
+
+### navigate(url)
+
+Navigates to a specified URL.
+
+<ParamField path="url" type="string" required>
+  The URL to navigate to
+</ParamField>
+
+```python
+agent.navigate("https://example.com")
+```
+
+### find_element(interaction, screenshot)
+
+Locates an element on the page based on its description using computer vision.
+
+<ParamField path="interaction" type="BrowserInteraction" required>
+  The interaction containing the element description
+</ParamField>
+
+<ParamField path="screenshot" type="PIL.Image" required>
+  Screenshot of the current webpage state
+</ParamField>
+
+Returns a `BrowserInteraction` with updated coordinates for the found element.
+
+```python
+interaction = BrowserInteraction(
+    action=BrowserAction.CLICK,
+    description="Login button"
+)
+screenshot = agent.actor.take_screenshot()
+interaction_with_coords = agent.find_element(interaction, screenshot)
+```
+
+### close()
+
+Cleans up browser resources and stops the agent.
+
+```python
+agent.close()
+```
+
+## Error Handling
+
+The agent will raise various exceptions for invalid interactions or when elements cannot be found:
+
+```python
+try:
+    agent.execute_interaction(interaction)
+except ValueError as e:
+    print(f"Invalid interaction: {e}")
+```

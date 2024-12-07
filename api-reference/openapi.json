@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
+    "title": "Simplex API",
+    "description": "Simplex's API for interacting with the browser using AI.",
     "license": {
       "name": "MIT"
     },
@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "http://sandbox.mintlify.com"
+      "url": "https://api.simplex.sh"
     }
   ],
   "security": [
@@ -19,17 +19,26 @@
     }
   ],
   "paths": {
-    "/plants": {
+    "/find_element": {
       "get": {
-        "description": "Returns all plants from the system that the user has access to",
+        "description": "Returns the bounding box of the element that matches the text description.",
         "parameters": [
           {
-            "name": "limit",
+            "name": "image",
             "in": "query",
-            "description": "The maximum number of results to return",
+            "description": "Base64 encoded screenshot of the webpage",
+            "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string"
+            }
+          },
+          {
+            "name": "text", 
+            "in": "query",
+            "description": "Natural language description of the element to find (e.g. \"login button\", \"dark mode toggle\")",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
         ],
@@ -96,8 +105,8 @@
         }
       }
     },
-    "/plants/{id}": {
-      "delete": {
+    "/get_next_step": {
+      "get": {
         "description": "Deletes a single plant based on the ID supplied",
         "parameters": [
           {

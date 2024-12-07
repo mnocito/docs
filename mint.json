@@ -29,8 +29,8 @@
     }
   ],
   "topbarCtaButton": {
-    "name": "Request API Key",
-    "url": "https://simplex.sh/request-api-key"
+    "name": "Request API Access",
+    "url": "https://simplex.sh/request-api-access"
   },
   "anchors": [
 
@@ -39,8 +39,7 @@
     {
       "group": "",
       "pages": [
-        "introduction",
-        "quickstart"
+        "introduction"
       ]
     },
     {

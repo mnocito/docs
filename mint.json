@@ -30,7 +30,7 @@
   ],
   "topbarCtaButton": {
     "name": "Request API Access",
-    "url": "/playground#api-request-form"
+    "url": "simplex.sh/playground#api-request-form"
   },
   "anchors": [
 

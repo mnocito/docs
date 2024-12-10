@@ -49,23 +49,11 @@
       ]
     },
     {
-      "group": "Python SDK",
-      "pages": [
-        "python-sdk/introduction",
-        "python-sdk/find_element",
-        "python-sdk/get_next_step",
-        "python-sdk/step_to_action",
-        "python-sdk/browser-interaction",
-        "python-sdk/browser-actor"
-      ]
-    },
-    {
       "group": "API Documentation",
       "pages": [
         "api-reference/introduction",
         "api-reference/endpoint/find_element",
-        "api-reference/endpoint/get_next_step",
-        "api-reference/endpoint/step_to_action"
+        "api-reference/endpoint/get_next_step"
       ]
     }
   ],

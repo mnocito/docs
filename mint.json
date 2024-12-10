@@ -30,7 +30,7 @@
   ],
   "topbarCtaButton": {
     "name": "Request API Access",
-    "url": "http://localhost:3000/playground#api-request-form"
+    "url": "/playground#api-request-form"
   },
   "anchors": [
 

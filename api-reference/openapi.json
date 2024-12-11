@@ -21,10 +21,10 @@
   "paths": {
     "/find_element": {
       "post": {
-        "description": "Returns the bounding box of the element that matches the text description.",
+        "description": "Returns the bounding box of the element that matches the text description using only vision",
         "parameters": [
           {
-            "name": "image",
+            "name": "image_data",
             "in": "query",
             "description": "Base64 encoded screenshot of the webpage",
             "required": true,
@@ -35,7 +35,7 @@
           {
             "name": "text", 
             "in": "query",
-            "description": "Natural language description of the element to find (e.g. \"login button\", \"dark mode toggle\")",
+            "description": "Natural language description of the element to find (e.g. \"login button\", \"dark mode toggle\", or even \"click dark mode\")",
             "required": true,
             "schema": {
               "type": "string"
@@ -44,13 +44,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Plant response",
+            "description": "Bounding box response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Plant"
+                    "$ref": "#/components/schemas/BoundingBox"
                   }
                 }
               }
@@ -71,10 +71,10 @@
     },
     "/get_next_step": {
       "post": {
-        "description": "Returns the bounding box of the element that matches the text description.",
+        "description": "Deduces the next step in a given high level task from the current state of the browser",
         "parameters": [
           {
-            "name": "image",
+            "name": "image_data",
             "in": "query",
             "description": "Base64 encoded screenshot of the webpage",
             "required": true,
@@ -85,7 +85,7 @@
           {
             "name": "text", 
             "in": "query",
-            "description": "Natural language description of the element to find (e.g. \"login button\", \"dark mode toggle\")",
+            "description": "High level task in natural language",
             "required": true,
             "schema": {
               "type": "string"
@@ -94,13 +94,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Plant response",
+            "description": "Next step response",
             "content": {
               "application/json": {
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Plant"
+                    "$ref": "#/components/schemas/NextStep"
                   }
                 }
               }
@@ -122,41 +122,29 @@
   },
   "components": {
     "schemas": {
-      "Plant": {
+      "BoundingBox": {
         "required": [
           "name"
         ],
         "type": "object",
         "properties": {
           "name": {
-            "description": "The name of the plant",
-            "type": "string"
-          },
-          "tag": {
-            "description": "Tag to specify the type",
+            "description": "The bounding box of the element: [x1, y1, x2, y2] where x1, y1 is the top left corner and x2, y2 is the bottom right corner",
             "type": "string"
           }
         }
       },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
-          },
-          {
-            "required": [
-              "id"
-            ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
-              }
-            }
+      "NextStep": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The next step in the high level task",
+            "type": "string"
           }
-        ]
+        }
       },
       "Error": {
         "required": [

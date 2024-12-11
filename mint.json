@@ -57,9 +57,13 @@
       ]
     }
   ],
-  
   "footerSocials": {
     "x": "https://x.com/SimplexData",
     "linkedin": "https://www.linkedin.com/company/simplex-data"
+  },
+  "api": {
+    "playground": {
+      "mode": "hide"
+    }
   }
 }

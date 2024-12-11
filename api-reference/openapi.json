@@ -70,27 +70,44 @@
       }
     },
     "/get_next_step": {
-      "get": {
-        "description": "Deletes a single plant based on the ID supplied",
+      "post": {
+        "description": "Returns the bounding box of the element that matches the text description.",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
+            "name": "image",
+            "in": "query",
+            "description": "Base64 encoded screenshot of the webpage",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
+              "type": "string"
+            }
+          },
+          {
+            "name": "text", 
+            "in": "query",
+            "description": "Natural language description of the element to find (e.g. \"login button\", \"dark mode toggle\")",
+            "required": true,
+            "schema": {
+              "type": "string"
             }
           }
         ],
         "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
+          "200": {
+            "description": "Plant response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Plant"
+                  }
+                }
+              }
+            }
           },
           "400": {
-            "description": "unexpected error",
+            "description": "Unexpected error",
             "content": {
               "application/json": {
                 "schema": {

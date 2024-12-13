@@ -37,23 +37,12 @@
   ],
   "navigation": [
     {
-      "group": "",
+      "group": "Python SDK",
       "pages": [
-        "introduction"
-      ]
-    },
-    {
-      "group": "Cookbook",
-      "pages": [
-        "cookbook/hishreya"
-      ]
-    },
-    {
-      "group": "API Documentation",
-      "pages": [
-        "api-reference/introduction",
-        "api-reference/endpoint/find_element",
-        "api-reference/endpoint/get_next_step"
+        "python-sdk/introduction",
+        "python-sdk/find_element",
+        "python-sdk/is_task_complete",
+        "python-sdk/get_next_step"
       ]
     }
   ],

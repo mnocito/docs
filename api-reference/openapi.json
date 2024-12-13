@@ -10,12 +10,7 @@
   },
   "servers": [
     {
-      "url": "https://api.simplex.sh"
-    }
-  ],
-  "security": [
-    {
-      "bearerAuth": []
+      "url": "https://u3mvtbirxf.us-east-1.awsapprunner.com"
     }
   ],
   "paths": {
@@ -24,18 +19,26 @@
         "description": "Returns the bounding box of the element that matches the text description.",
         "parameters": [
           {
-            "name": "image",
-            "in": "query",
-            "description": "Base64 encoded screenshot of the webpage",
+            "name": "element_description",
+            "description": "Natural language description of the element to find (e.g. \"login button\", \"dark mode toggle\")",
             "required": true,
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "text", 
-            "in": "query",
-            "description": "Natural language description of the element to find (e.g. \"login button\", \"dark mode toggle\")",
+            "name": "image_data",
+            "description": "Screenshot of the webpage",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          },
+          {
+            "name": "api_key",
+
+            "description": "API key for authentication",
             "required": true,
             "schema": {
               "type": "string"

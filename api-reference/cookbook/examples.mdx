@@ -15,7 +15,7 @@ def open_feedback_loop():
     high_level_task = "Find a flight from New York to San Francisco on January 1st, 2025"
     url = "https://www.google.com/travel/flights"
 
-    client = Simplex(api_key=os.getenv("SIMPLEX_API_KEY"))
+    client = Simplex(api_key=os.getenv("SIMPLEX_API_KEY"), record_video=True)
     client.browser_actor.navigate_to_url(url)
     state = client.browser_actor.take_screenshot()
 
@@ -41,7 +41,7 @@ def closed_feedback_loop():
     high_level_task = "Find a flight from New York to San Francisco on January 1st, 2025"
     url = "https://www.google.com/travel/flights"
 
-    client = Simplex(api_key=os.getenv("SIMPLEX_API_KEY"))
+    client = Simplex(api_key=os.getenv("SIMPLEX_API_KEY"), record_video=True)
     client.browser_actor.navigate_to_url(url)
     state = client.browser_actor.take_screenshot()
 
@@ -71,7 +71,7 @@ and only uses our API endpoints to find element locations and execute actions.
 
 ```python
 def precomputed_trajectory():
-    client = Simplex(api_key=os.getenv("SIMPLEX_API_KEY"))
+    client = Simplex(api_key=os.getenv("SIMPLEX_API_KEY"), record_video=True)
     high_level_task = "Find a flight from New York to San Francisco on January 1st, 2025"
     url = "https://www.google.com/travel/flights"
 

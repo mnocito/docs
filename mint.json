@@ -1,5 +1,4 @@
 {
-  "$schema": "https://mintlify.com/schema.json",
   "name": "Simplex",
   "logo": {
     "dark": "/logo/logo.webp",
@@ -37,22 +36,37 @@
   ],
   "navigation": [
     {
-      "group": "Python SDK",
+      "group": "Getting Started",
+      "pages": ["api-reference/introduction"]
+    },
+    {
+      "group": "API Reference",
       "pages": [
-        "python-sdk/introduction",
-        "python-sdk/find_element",
-        "python-sdk/is_task_complete",
-        "python-sdk/get_next_step"
+        {
+          "group": "Endpoints",
+          "pages": [
+            "api-reference/endpoints/find-element",
+            "api-reference/endpoints/get-next-step",
+            "api-reference/endpoints/step-to-action",
+            "api-reference/endpoints/is-completed"
+          ]
+        },
+        {
+          "group": "Using the API",
+          "pages": [
+            "api-reference/using-the-api/sdk-intro",
+            "api-reference/using-the-api/simplex-client",
+            "api-reference/browser/browser-actor",
+            "api-reference/browser/browser-elements",
+            "api-reference/browser/browser-interactions",
+            "api-reference/using-the-api/authentication"
+          ]
+        }
       ]
+    },
+    {
+      "group": "Cookbook",
+      "pages": ["api-reference/cookbook/examples"]
     }
-  ],
-  "footerSocials": {
-    "x": "https://x.com/SimplexData",
-    "linkedin": "https://www.linkedin.com/company/simplex-data"
-  },
-  "api": {
-    "playground": {
-      "mode": "hide"
-    }
-  }
-}
+  ]
+} 

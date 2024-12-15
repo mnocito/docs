@@ -1,0 +1,138 @@
+---
+title: 'Browser Elements'
+description: 'Element types and parameters for browser interactions'
+---
+
+Browser elements define the parameters that can be passed to browser interactions. Each element type serves a specific purpose in browser automation.
+
+## WebElement
+
+```python
+@dataclass
+class WebElement:
+    desc: str
+    coordinates: Tuple[int, int]
+```
+
+Represents an element on the webpage with its description and coordinates.
+
+### Parameters
+
+<ParamField path="desc" type="string" required>
+  Natural language description of the element (e.g., "login button", "email input field")
+</ParamField>
+
+<ParamField path="coordinates" type="Tuple[int, int]" required>
+  X,Y coordinates of the element on the page
+</ParamField>
+
+### Example
+
+```python
+button = WebElement(
+    desc="Sign up button in the top right corner",
+    coordinates=(100, 200)
+)
+
+# Validate the element
+is_valid = button.validate()  # Returns True if both desc and coordinates are set
+```
+
+## Text
+
+```python
+@dataclass
+class Text:
+    body: str
+```
+
+Represents text input for typing actions.
+
+### Parameters
+
+<ParamField path="body" type="string" required>
+  The text to be typed into an element
+</ParamField>
+
+### Example
+
+```python
+text_input = Text(
+    body="user@example.com"
+)
+
+# Validate the text
+is_valid = text_input.validate()  # Returns True if body is not empty
+```
+
+## Duration
+
+```python
+@dataclass
+class Duration:
+    seconds: float
+```
+
+Represents a time duration for wait actions.
+
+### Parameters
+
+<ParamField path="seconds" type="float" required>
+  Duration in seconds (can be fractional)
+</ParamField>
+
+### Example
+
+```python
+wait_time = Duration(
+    seconds=2.5
+)
+
+# Validate the duration
+is_valid = wait_time.validate()  # Returns True if seconds is set
+```
+
+## ActionParam Type
+
+ActionParam is a union type that can be any of the above parameter types:
+
+```python
+ActionParam = Union[WebElement, Text, Duration]
+```
+
+This allows browser interactions to accept different parameter types depending on the action being performed:
+
+- CLICK, SCROLL, HOVER actions require WebElement
+- TYPE actions require Text
+- WAIT actions require Duration
+
+## Usage with Browser Interactions
+
+```python
+from enums import BrowserAction, BrowserInteraction, WebElement, Text, Duration
+
+# Click interaction
+click = BrowserInteraction(
+    action=BrowserAction.CLICK,
+    action_param=WebElement(
+        desc="Submit button",
+        coordinates=(200, 300)
+    )
+)
+
+# Type interaction
+type_text = BrowserInteraction(
+    action=BrowserAction.TYPE,
+    action_param=Text(
+        body="Hello, world!"
+    )
+)
+
+# Wait interaction
+wait = BrowserInteraction(
+    action=BrowserAction.WAIT,
+    action_param=Duration(
+        seconds=1.5
+    )
+)
+``` 

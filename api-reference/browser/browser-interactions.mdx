@@ -1,0 +1,127 @@
+---
+title: 'Browser Interactions'
+description: 'Available browser actions and interactions'
+---
+
+Browser interactions define how to interact with web elements. Each interaction combines an action type with its required parameters.
+
+## BrowserInteraction Class
+
+```python
+@dataclass
+class BrowserInteraction:
+    action: BrowserAction
+    action_param: ActionParam
+```
+
+### Parameters
+
+<ParamField path="action" type="BrowserAction" required>
+  The type of action to perform
+</ParamField>
+
+<ParamField path="action_param" type="ActionParam" required>
+  Parameters required for the action (WebElement, Text, or Duration)
+</ParamField>
+
+## Available Actions
+
+### Click
+```python
+BrowserAction.CLICK
+```
+Clicks at specific coordinates on the page. Requires a WebElement parameter.
+
+Example:
+```python
+click_interaction = BrowserInteraction(
+    action=BrowserAction.CLICK,
+    action_param=WebElement(
+        desc="Sign up button",
+        coordinates=(100, 200)
+    )
+)
+```
+
+### Type
+```python
+BrowserAction.TYPE
+```
+Types text into the active element. Requires a Text parameter.
+
+Example:
+```python
+type_interaction = BrowserInteraction(
+    action=BrowserAction.TYPE,
+    action_param=Text(
+        body="user@example.com"
+    )
+)
+```
+
+### Hover
+```python
+BrowserAction.HOVER
+```
+Moves the mouse to specific coordinates. Requires a WebElement parameter.
+
+Example:
+```python
+hover_interaction = BrowserInteraction(
+    action=BrowserAction.HOVER,
+    action_param=WebElement(
+        desc="Dropdown menu",
+        coordinates=(150, 100)
+    )
+)
+```
+
+### Scroll
+```python
+BrowserAction.SCROLL
+```
+Scrolls the page vertically. Requires a WebElement parameter with target coordinates.
+
+Example:
+```python
+scroll_interaction = BrowserInteraction(
+    action=BrowserAction.SCROLL,
+    action_param=WebElement(
+        desc="Bottom of page",
+        coordinates=(0, 1000)
+    )
+)
+```
+
+### Wait
+```python
+BrowserAction.WAIT
+```
+Waits for a specified duration. Requires a Duration parameter.
+
+Example:
+```python
+wait_interaction = BrowserInteraction(
+    action=BrowserAction.WAIT,
+    action_param=Duration(
+        seconds=2.5
+    )
+)
+```
+
+## Validation
+
+Each interaction can be validated to ensure it has the correct parameters:
+
+```python
+interaction = BrowserInteraction(
+    action=BrowserAction.CLICK,
+    action_param=WebElement(
+        desc="Submit button",
+        coordinates=(200, 300)
+    )
+)
+
+# Returns True if the interaction has valid parameters
+is_valid = interaction.validate()
+``` 

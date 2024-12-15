@@ -1,0 +1,45 @@
+---
+title: '/get_next_step'
+description: 'Get the next step to complete a high-level task'
+api: 'POST /get_next_step'
+---
+
+This endpoint analyzes a screenshot and determines the next step needed to complete a given high-level task.
+
+### Request
+
+<ParamField body="high_level_task" type="string" required>
+  Description of the overall task to complete (e.g. "Log into the application")
+</ParamField>
+
+<ParamField body="screenshot" type="file" required>
+  Current screenshot of the application
+</ParamField>
+
+<ParamField body="api_key" type="string" required>
+  Your API key for authentication
+</ParamField>
+
+<ParamField body="history" type="string">
+  Optional string containing previous steps taken
+</ParamField>
+
+### Response
+
+Returns a string describing the next step to take to complete the task.
+
+### Example Request
+
+```bash
+curl -X POST https://u3mvtbirxf.us-east-1.awsapprunner.com/get_next_step \
+  -F "high_level_task=Log into the application" \
+  -F "screenshot=@current_screen.png" \
+  -F "history=Step 1: Click login button\nStep 2: Enter username" \
+  -F "api_key=your_api_key" \
+```
+
+### Example Response
+
+```json
+"Enter your email address in the email input field"
+``` 

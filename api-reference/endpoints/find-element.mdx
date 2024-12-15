@@ -1,0 +1,40 @@
+---
+title: '/find-element'
+description: 'Locate an element in a screenshot based on a natural language description'
+api: 'POST /find-element'
+---
+
+This endpoint takes a screenshot and a natural language description of an element, and returns the bounding box coordinates of the matching element. Coordinates are in pixels relative to the top-left corner of the image.
+
+### Request
+
+<ParamField body="element_description" type="string" required>
+  Natural language description of the element to find (e.g. "Login button", "Email input field")
+</ParamField>
+
+<ParamField body="image_data" type="file" required>
+  Screenshot image file in PNG or JPEG format
+</ParamField>
+
+<ParamField body="api_key" type="string" required>
+  Your API key for authentication
+</ParamField>
+
+### Example Request
+
+```bash
+curl -X POST https://u3mvtbirxf.us-east-1.awsapprunner.com/find-element \
+  -F "element_description=Login button" \
+  -F "image_data=@screenshot.png" \
+  -F "api_key=your_api_key"
+```
+
+### Example Response
+
+```json
+{
+  "x1": 100,
+  "y1": 200,
+  "x2": 200,
+  "y2": 250
+}

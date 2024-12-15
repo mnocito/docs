@@ -1,0 +1,41 @@
+---
+title: 'Simplex Client'
+description: 'Main client for AI-powered browser automation'
+---
+
+The Simplex client is the main entry point for the SDK. It combines AI capabilities with browser automation through its integrated BrowserActor.
+
+## Constructor
+
+```python
+client = Simplex(
+    api_key: str,
+    timeout: Optional[float] = None,
+    max_retries: int = 3
+)
+```
+
+### Parameters
+
+<ParamField path="api_key" type="string" required>
+  Your API key for authentication
+</ParamField>
+
+<ParamField path="timeout" type="float">
+  Timeout in seconds for API requests
+</ParamField>
+
+<ParamField path="max_retries" type="integer" default="3">
+  Maximum number of retries for failed requests
+</ParamField>
+
+## Properties
+
+### browser_actor
+
+```python
+@property
+def browser_actor(self) -> BrowserActor
+```
+
+The integrated BrowserActor instance for browser automation. See [Browser Actor](/api-reference/browser/browser-actor) for details. 

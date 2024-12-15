@@ -1,0 +1,30 @@
+---
+title: 'Browser Actor'
+description: 'Browser automation and control interface'
+---
+
+The BrowserActor class provides methods for browser automation, screenshot capture, and video recording.
+
+## Constructor
+
+```python
+actor = BrowserActor(
+    driver: Optional[Browser] = None,
+    headless: Optional[bool] = True,
+    record_video: Optional[bool] = False
+)
+```
+
+### Parameters
+
+<ParamField path="driver" type="Browser">
+  Optional Playwright browser instance. If not provided, a new one will be created
+</ParamField>
+
+<ParamField path="headless" type="boolean" default="true">
+  Whether to run the browser in headless mode
+</ParamField>
+
+<ParamField path="record_video" type="boolean" default="false">
+  Enable video recording of browser interactions
+</ParamField> 

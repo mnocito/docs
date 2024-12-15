@@ -29,7 +29,7 @@ def open_feedback_loop():
             client.browser_actor.execute(action)
             state = client.browser_actor.take_screenshot()
 
-        
+    client.browser_actor.close()
     client.browser_actor.save_recording("output.mp4")
 ```
 
@@ -60,7 +60,7 @@ def closed_feedback_loop():
 
             step_complete = client.is_step_complete(next_step, state)
 
-        
+    client.browser_actor.close()
     client.browser_actor.save_recording("output.mp4")
 ``` 
 
@@ -94,6 +94,7 @@ def precomputed_trajectory():
             client.browser_actor.execute(action)
             state = client.browser_actor.take_screenshot()
         
+    client.browser_actor.close()
     client.browser_actor.save_recording("output.mp4")
 ```
 

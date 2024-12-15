@@ -1,8 +1,9 @@
 {
+  "$schema": "https://mintlify.com/schema.json",
   "name": "Simplex",
   "logo": {
-    "dark": "/logo/logo.webp",
-    "light": "/logo/logo.webp"
+    "dark": "/logo/Name.png",
+    "light": "/logo/Name.png"
   },
   "modeToggle": {
     "default": "light",

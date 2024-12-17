@@ -40,3 +40,126 @@ def browser_actor(self) -> BrowserActor
 ```
 
 The integrated BrowserActor instance for browser automation. See [Browser Actor](/api-reference/browser/browser-actor) for details. 
+
+## Functions
+
+### find_element
+
+```python
+def find_element(
+    self,
+    element_description: str,
+    screenshot: Image.Image,
+) -> List[int]
+```
+
+Finds an element in a screenshot based on a natural language description.
+
+#### Parameters
+
+<ParamField path="element_description" type="string" required>
+  Natural language description of the element to find
+</ParamField>
+
+<ParamField path="screenshot" type="Image.Image" required>
+  Screenshot of the current screen
+</ParamField>
+
+#### Returns
+List of 4 integers representing the bounding box [x1, y1, x2, y2]
+
+### get_next_step
+
+```python
+def get_next_step(
+    self,
+    task_description: str,
+    screenshot: Image.Image,
+    history: Optional[list] = None,
+) -> Dict[str, Any]
+```
+
+Gets the next step to complete a task based on current screenshot and history.
+
+#### Parameters
+
+<ParamField path="task_description" type="string" required>
+  Natural language description of the task to complete
+</ParamField>
+
+<ParamField path="screenshot" type="Image.Image" required>
+  Screenshot of the current screen
+</ParamField>
+
+<ParamField path="history" type="list">
+  List of previous steps taken to complete the task
+</ParamField>
+
+### is_step_complete
+
+```python
+def is_step_complete(
+    self,
+    step_description: str,
+    screenshot: Image.Image,
+) -> bool
+```
+
+Checks if a step is complete based on a natural language description.
+
+#### Parameters
+
+<ParamField path="step_description" type="string" required>
+  Natural language description of the step to check
+</ParamField>
+
+<ParamField path="screenshot" type="Image.Image" required>
+  Screenshot of the current screen
+</ParamField>
+
+### step_to_action
+
+```python
+def step_to_action(
+    self,
+    step_description: str,
+    screenshot: Image.Image,
+) -> List[BrowserInteraction]
+```
+
+Converts a step description to a list of Simplex BrowserInteractions.
+
+#### Parameters
+
+<ParamField path="step_description" type="string" required>
+  Natural language description of the step to convert
+</ParamField>
+
+<ParamField path="screenshot" type="Image.Image" required>
+  Screenshot of the current screen
+</ParamField>
+
+#### Returns
+List of BrowserInteractions to complete the step
+
+### is_task_complete
+
+```python
+def is_task_complete(
+    self,
+    task_description: str,
+    screenshot: Image.Image,
+) -> bool
+```
+
+Checks if a task is complete based on a natural language description.
+
+#### Parameters
+
+<ParamField path="task_description" type="string" required>
+  Natural language description of the task to check
+</ParamField>
+
+<ParamField path="screenshot" type="Image.Image" required>
+  Screenshot of the current screen
+</ParamField>

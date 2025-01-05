@@ -1,0 +1,52 @@
+---
+title: 'Quickstart'
+description: 'Simplex provides developers with AI-powered tools for browser automation. You can get started with the SDK below or call the API directly.
+'
+---
+## Requesting an API Key
+Since we're an early-stage company, we're asking users to talk to us for 15 minutes before provisioning an API key. You can [book time with us here](https://cal.com/simplex-data/15min) or equivalently click the **Request API Access** button in the top right. We promise we'll be quick!
+## SDK Installation
+If you don't have playwright installed, you'll need to install it first.
+```bash
+pip install playwright
+playwright install
+```
+Then, just run 
+```bash
+pip install simplex
+```
+
+## Example Usage
+
+The SDK consists of three main components:
+
+1. **Simplex Client** - The main entry point that provides AI-powered element detection and task automation
+2. **Browser Actor** - Handles browser automation and recording, included within the Simplex Client
+3. **Browser Interactions** - Defines the possible browser actions and elements that can be automated
+
+## Quick Example
+
+```python
+from simplex import Simplex
+
+# Initialize the Simplex client (includes BrowserActor)
+client = Simplex(api_key="your-api-key")
+
+# Navigate to a page using the browser actor
+client.browser_actor.navigate_to_url("https://example.com")
+
+# Take a screenshot
+screenshot = client.browser_actor.take_screenshot()
+
+# Use AI to find an element
+bbox = client.find_element(
+    element_description="Sign up button",
+    screenshot=screenshot
+)
+
+# Get next step for a task
+next_step = client.get_next_step(
+    task_description="Sign up for an account",
+    screenshot=screenshot
+)
+``` 

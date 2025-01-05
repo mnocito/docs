@@ -57,17 +57,10 @@
           "pages": [
             "api-reference/using-the-api/sdk-intro",
             "api-reference/using-the-api/simplex-client",
-            "api-reference/browser/browser-actor",
-            "api-reference/browser/browser-elements",
-            "api-reference/browser/browser-interactions",
             "api-reference/using-the-api/authentication"
           ]
         }
       ]
-    },
-    {
-      "group": "Cookbook",
-      "pages": ["api-reference/cookbook/examples"]
     }
   ]
 } 

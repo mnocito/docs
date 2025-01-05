@@ -10,9 +10,7 @@ The Simplex client is the main entry point for the SDK. It combines AI capabilit
 ```python
 client = Simplex(
     api_key: str,
-    timeout: Optional[float] = None,
-    max_retries: int = 3,
-    record_video: bool = False
+    driver: Optional[Page] = None
 )
 ```
 
@@ -22,26 +20,15 @@ client = Simplex(
   Your API key for authentication
 </ParamField>
 
-<ParamField path="timeout" type="float">
-  Timeout in seconds for API requests
+<ParamField path="driver" type="playwright.sync_api.Page">
+  Playwright page object. If not provided, a new headless browser instance will be created.
 </ParamField>
-
-<ParamField path="max_retries" type="integer" default="3">
-  Maximum number of retries for failed requests
-</ParamField>
-
-## Properties
-
-### browser_actor
-
-```python
-@property
-def browser_actor(self) -> BrowserActor
-```
-
-The integrated BrowserActor instance for browser automation. See [Browser Actor](/api-reference/browser/browser-actor) for details. 
 
 ## Functions
+
+### Atomic Operations
+
+The following functions are atomic operations that form the building blocks of more complex automation:
 
 ### find_element
 
@@ -49,7 +36,7 @@ The integrated BrowserActor instance for browser automation. See [Browser Actor]
 def find_element(
     self,
     element_description: str,
-    screenshot: Image.Image,
+    state: Optional[Image.Image] = None,
 ) -> List[int]
 ```
 
@@ -61,61 +48,12 @@ Finds an element in a screenshot based on a natural language description.
   Natural language description of the element to find
 </ParamField>
 
-<ParamField path="screenshot" type="Image.Image" required>
-  Screenshot of the current screen
+<ParamField path="state" type="Image.Image">
+  Screenshot of the current screen. If not provided, a new screenshot will be taken automatically.
 </ParamField>
 
 #### Returns
 List of 4 integers representing the bounding box [x1, y1, x2, y2]
-
-### get_next_step
-
-```python
-def get_next_step(
-    self,
-    task_description: str,
-    screenshot: Image.Image,
-    history: Optional[list] = None,
-) -> Dict[str, Any]
-```
-
-Gets the next step to complete a task based on current screenshot and history.
-
-#### Parameters
-
-<ParamField path="task_description" type="string" required>
-  Natural language description of the task to complete
-</ParamField>
-
-<ParamField path="screenshot" type="Image.Image" required>
-  Screenshot of the current screen
-</ParamField>
-
-<ParamField path="history" type="list">
-  List of previous steps taken to complete the task
-</ParamField>
-
-### is_step_complete
-
-```python
-def is_step_complete(
-    self,
-    step_description: str,
-    screenshot: Image.Image,
-) -> bool
-```
-
-Checks if a step is complete based on a natural language description.
-
-#### Parameters
-
-<ParamField path="step_description" type="string" required>
-  Natural language description of the step to check
-</ParamField>
-
-<ParamField path="screenshot" type="Image.Image" required>
-  Screenshot of the current screen
-</ParamField>
 
 ### step_to_action
 
@@ -123,11 +61,11 @@ Checks if a step is complete based on a natural language description.
 def step_to_action(
     self,
     step_description: str,
-    screenshot: Image.Image,
-) -> List[BrowserInteraction]
+    state: Optional[Image.Image] = None
+) -> List[List[str]]
 ```
 
-Converts a step description to a list of Simplex BrowserInteractions.
+Converts a natural language step description into a list of actions.
 
 #### Parameters
 
@@ -135,31 +73,101 @@ Converts a step description to a list of Simplex BrowserInteractions.
   Natural language description of the step to convert
 </ParamField>
 
-<ParamField path="screenshot" type="Image.Image" required>
-  Screenshot of the current screen
+<ParamField path="state" type="Image.Image">
+  Screenshot of the current screen. If not provided, a new screenshot will be taken automatically.
 </ParamField>
 
 #### Returns
-List of BrowserInteractions to complete the step
+List of action pairs, where each pair is a list of two strings representing the action type and target
 
-### is_task_complete
+### Composite Operations
+
+The following functions combine atomic operations to perform higher-level tasks:
+
+### do
 
 ```python
-def is_task_complete(
+def do(
     self,
-    task_description: str,
-    screenshot: Image.Image,
-) -> bool
+    step_description: str
+) -> None
 ```
 
-Checks if a task is complete based on a natural language description.
+Executes a natural language step by converting it to actions and performing them in sequence. This function combines `step_to_action` with action execution.
 
 #### Parameters
 
-<ParamField path="task_description" type="string" required>
-  Natural language description of the task to check
+<ParamField path="step_description" type="string" required>
+  Natural language description of what should be done (e.g. "Click the login button")
 </ParamField>
 
-<ParamField path="screenshot" type="Image.Image" required>
-  Screenshot of the current screen
+#### Implementation Details
+1. Takes a screenshot of the current page
+2. Uses `step_to_action` to convert the description into concrete actions
+3. Executes each action in sequence
+
+#### Example
+
+```python
+client.do("Click the login button")
+client.do("Type 'hello@example.com' into the email field")
+```
+
+### Browser Interactions
+
+The following functions handle direct browser manipulation and automation:
+
+### goto
+
+```python
+def goto(
+    self,
+    url: str
+) -> None
+```
+
+Navigates the browser to a specified URL.
+
+#### Parameters
+
+<ParamField path="url" type="string" required>
+  The URL to navigate to
 </ParamField>
+
+### execute_action
+
+```python
+def execute_action(
+    self,
+    action: List[List[str]]
+) -> None
+```
+
+Executes a specific browser action using the Playwright driver. This function handles various types of interactions like clicking, typing, and scrolling.
+
+#### Parameters
+
+<ParamField path="action" type="List[List[str]]" required>
+  A list containing action type and description pairs. Supported action types:
+  - `["CLICK", "element description"]` - Clicks on the described element
+  - `["HOVER", "element description"]` - Hovers over the described element
+  - `["TYPE", "text to type"]` - Types the specified text
+  - `["SCROLL", "scroll amount"]` - Scrolls by the specified amount
+  - `["WAIT", "milliseconds"]` - Waits for the specified duration
+</ParamField>
+
+#### Implementation Details
+1. Takes a screenshot of the current state
+2. Based on the action type:
+   - For CLICK/HOVER: Finds the element and interacts with its center
+   - For TYPE: Inputs the specified text
+   - For SCROLL: Moves the page vertically
+   - For WAIT: Pauses execution
+
+#### Example
+
+```python
+client.execute_action(["CLICK", "login button"])
+client.execute_action(["TYPE", "hello@example.com"])
+client.execute_action(["WAIT", "1000"])  # Wait for 1 second
+```

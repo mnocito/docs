@@ -4,7 +4,7 @@ description: 'Main client for AI-powered browser automation'
 ---
 
 The Simplex client is the main entry point for the SDK. It combines AI capabilities with browser automation through Playwright.
-We have broken the functions into [high level](#high-level-functions) and [low level](#low-level-functions) functions.
+We offer both [high level](#high-level-functions) and [low level](#low-level-functions) functions.
 ## Constructor
 
 ```python
@@ -67,7 +67,7 @@ def find_element(
     element_description: str,
     state: Optional[Image.Image] = None,
     annotate: bool = False
-) -> List[int]
+) -> List[x1, y1, x2, y2]
 ```
 
 <ParamField path="element_description" type="string" required>
@@ -78,7 +78,7 @@ def find_element(
   Screenshot of the current screen. If not provided, a new screenshot will be taken.
 </ParamField>
 
-<ParamField path="annotate" type="boolean" default="false">
+<ParamField path="annotate" type="boolean" default="False">
   If true, adds a visual red border overlay around the found element
 </ParamField>
 

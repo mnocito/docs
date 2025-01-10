@@ -43,22 +43,16 @@
     {
       "group": "SDK Reference",
       "pages": [
-        "api-reference/using-the-api/simplex-client"
+        "sdk-reference/simplex-client"
       ]
     },
     {
       "group": "API Reference",
       "pages": [
-        {
-          "group": "Endpoints",
-          "pages": [
-            "api-reference/endpoints/find-element",
-            "api-reference/endpoints/get-next-step",
-            "api-reference/endpoints/step-to-action",
-            "api-reference/endpoints/is-completed"
-          ]
-        }
-      ]
+            "api-reference/find-element",
+            "api-reference/step-to-action",
+            "api-reference/is-completed"
+        ]
     }
   ],
   "api": {

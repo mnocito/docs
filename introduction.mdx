@@ -1,10 +1,10 @@
 ---
 title: 'Quickstart'
-description: 'Simplex is an SDK that provides low-level functions you can use to create reliable web automations using code and natural language. You can get started with the python SDK below or call the API directly.
+description: 'Simplex provides developers with AI-powered tools for browser automation. You can get started with the SDK below or call the API directly.
 '
 ---
 ## Requesting an API Key
-Since we're an early-stage company, we're asking users to talk to us for 10 minutes before provisioning an API key. You can [book time with us here](https://cal.com/simplex-data/15min) or equivalently click the **Request API Access** button in the top right. We promise we'll be quick!
+Since we're an early-stage company, we're asking users to talk to us before provisioning an API key. You can [fill out a 10 second form here](https://simplex.sh/playground#api-request-form) or equivalently click the **Request API Access** button in the top right. We promise we'll be quick!
 ## SDK Installation
 If you don't have playwright installed, you'll need to install it first.
 ```bash
@@ -16,8 +16,8 @@ Then, just run
 pip install simplex
 ```
 
-## Some quick examples
-Automate an entire workflow
+## Examples
+Automate finding 3D assets from the CGTrader website.
 ```python
 # Example workflow
 urls = []
@@ -31,7 +31,6 @@ for asset in assets:
     simplex.do(f"search for {asset}")  
     simplex.do("click on search button")
     simplex.do(f"click on the first product")
-    driver.wait_for_timeout(3000)
     urls.append(simplex.driver.url)
 ```
 
@@ -40,16 +39,19 @@ or perform lower level actions
 from simplex import Simplex
 
 # Initialize the Simplex client
-client = Simplex(api_key="your-api-key")
+simplex = Simplex(api_key="your-api-key")
 
-# Navigate to a page using the browser actor
-client.goto("https://news.ycombinator.com/show")
+# Navigate to a page
+simplex.goto("https://news.ycombinator.com/show")
 
 # Find an element on the page
-client.find_element("submit")
+simplex.find_element("submit button")
 
-# or get a trajectory for a small task
-actions = client.step_to_action("click on the top post")
+# or get a trajectory for a small task # i think people won't understand this without more context :(
+actions = simplex.step_to_action("click on the top post")
+
+
+
 ``` 
 
 

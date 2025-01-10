@@ -1,10 +1,10 @@
 ---
 title: 'Quickstart'
-description: 'Simplex provides developers with AI-powered tools for browser automation. You can get started with the SDK below or call the API directly.
+description: 'Simplex is an SDK that provides low-level functions you can use to create reliable web automations using code and natural language. You can get started with the python SDK below or call the API directly.
 '
 ---
 ## Requesting an API Key
-Since we're an early-stage company, we're asking users to talk to us for 15 minutes before provisioning an API key. You can [book time with us here](https://cal.com/simplex-data/15min) or equivalently click the **Request API Access** button in the top right. We promise we'll be quick!
+Since we're an early-stage company, we're asking users to talk to us for 10 minutes before provisioning an API key. You can [book time with us here](https://cal.com/simplex-data/15min) or equivalently click the **Request API Access** button in the top right. We promise we'll be quick!
 ## SDK Installation
 If you don't have playwright installed, you'll need to install it first.
 ```bash
@@ -16,37 +16,40 @@ Then, just run
 pip install simplex
 ```
 
-## Example Usage
+## Some quick examples
+Automate an entire workflow
+```python
+# Example workflow
+urls = []
+assets = ["apple watch", "victorian chair"]
 
-The SDK consists of three main components:
+simplex = Simplex(api_key=os.getenv("SIMPLEX_API_KEY"), driver=driver)
+simplex.goto("https://www.cgtrader.com/")
 
-1. **Simplex Client** - The main entry point that provides AI-powered element detection and task automation
-2. **Browser Actor** - Handles browser automation and recording, included within the Simplex Client
-3. **Browser Interactions** - Defines the possible browser actions and elements that can be automated
+for asset in assets:
+    simplex.goto("https://www.cgtrader.com")
+    simplex.do(f"search for {asset}")  
+    simplex.do("click on search button")
+    simplex.do(f"click on the first product")
+    driver.wait_for_timeout(3000)
+    urls.append(simplex.driver.url)
+```
 
-## Quick Example
-
+or perform lower level actions 
 ```python
 from simplex import Simplex
 
-# Initialize the Simplex client (includes BrowserActor)
+# Initialize the Simplex client
 client = Simplex(api_key="your-api-key")
 
 # Navigate to a page using the browser actor
-client.browser_actor.navigate_to_url("https://example.com")
+client.goto("https://news.ycombinator.com/show")
 
-# Take a screenshot
-screenshot = client.browser_actor.take_screenshot()
+# Find an element on the page
+client.find_element("submit")
 
-# Use AI to find an element
-bbox = client.find_element(
-    element_description="Sign up button",
-    screenshot=screenshot
-)
-
-# Get next step for a task
-next_step = client.get_next_step(
-    task_description="Sign up for an account",
-    screenshot=screenshot
-)
+# or get a trajectory for a small task
+actions = client.step_to_action("click on the top post")
 ``` 
+
+

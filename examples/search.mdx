@@ -1,0 +1,25 @@
+---
+title: 'Search for items'
+description: 'Client for AI-powered browser automation'
+---
+
+```python search.py
+from simplex import Simplex
+simplex = Simplex(api_key=os.getenv("SIMPLEX_API_KEY"))
+
+# You can run a search on any webpage with a search bar using this command.
+def search(website, search_query):
+    # Mouse over a function to see its docstring.
+    simplex.goto(website)
+    # You can CLICK, HOVER, TYPE, SCROLL, or WAIT.
+    # CLICK takes a natural language query and produces a coordinate on the screen.
+    # simplex.click('the search bar')
+    # simplex.type(search_query)
+    simplex.execute_action(('CLICK', 'the search button'))
+    simplex.execute_action(('CLICK', 'the first search result'))
+
+# We've whitelisted some common domains for you to test with. Mouseover_this_text_to_see_all_the_available_domains.
+search("https://cgtrader.com/", "iphone")
+search("https://youtube.com/", "cats")
+search("mit.edu", "alyssa p hacker")
+```

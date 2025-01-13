@@ -43,15 +43,27 @@
     {
       "group": "SDK Reference",
       "pages": [
-        "sdk-reference/simplex-client"
+        {
+          "group": "Simplex Client",
+          "pages": [
+            "sdk-reference/constructor",
+            "sdk-reference/actions",
+            "sdk-reference/extractors"
+          ]
+        },
+        {
+          "group": "Code Examples",
+          "pages": [
+            "examples/search",
+            "examples/extract"
+          ]
+        }
       ]
     },
     {
       "group": "API Reference",
       "pages": [
-            "api-reference/find-element",
-            "api-reference/step-to-action",
-            "api-reference/is-completed"
+            "api-reference/find-element"
         ]
     }
   ],

@@ -1,10 +1,8 @@
 ---
-title: 'Simplex Client'
-description: 'Main client for AI-powered browser automation'
+title: 'extract()'
+description: 'Client for AI-powered browser automation'
 ---
 
-The Simplex client is the main entry point for the SDK. It combines AI capabilities with browser automation through Playwright.
-We offer both [high level](#high-level-functions) and [low level](#low-level-functions) functions.
 ## Constructor
 
 ```python
@@ -15,7 +13,7 @@ client = Simplex(
 ```
 
 <ParamField path="api_key" type="string" required>
-  Your API key for authentication
+  API key for authentication.
 </ParamField>
 
 <ParamField path="browser" type="playwright.sync_api.Browser">
@@ -23,9 +21,7 @@ client = Simplex(
 </ParamField>
 
 
-## High-Level Functions
-These functions provide an intuitive interface for automated workflows. They handle complex operations like taking screenshots, converting natural language to actions, and executing those actions.
-
+## Functions
 ### goto()
 ```python
 def goto(self, url: str) -> None
@@ -38,28 +34,6 @@ def goto(self, url: str) -> None
 ```python
 client.goto("https://www.example.com")
 ```
-
-### do()
-```python
-def do(self, step_description: str, annotate: bool = False) -> None
-```
-
-<ParamField path="step_description" type="string" required>
-  Natural language description of what should be done (e.g. "Click the login button")
-</ParamField>
-
-<ParamField path="annotate" type="boolean" default="false">
-  If true, visualizes the actions being performed
-</ParamField>
-
-```python
-client.do("Click the login button")
-client.do("Type 'hello@example.com' into the email field")
-```
-
-## Low-Level Functions
-These atomic functions provide fine-grained control over browser interactions. They're useful for debugging or integrating with custom automation agents.
-
 ### find_element()
 ```python
 def find_element(
@@ -67,7 +41,7 @@ def find_element(
     element_description: str,
     state: Optional[Image.Image] = None,
     annotate: bool = False
-) -> List[x1, y1, x2, y2]
+) -> Tuple[int, int, int, int]
 ```
 
 <ParamField path="element_description" type="string" required>

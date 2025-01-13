@@ -1,0 +1,64 @@
+---
+title: 'Actions'
+description: 'Use playwright and some AI to perform actions on the page'
+---
+
+## goto
+Navigate to a specific URL.
+
+```python
+def goto(self, url: str) -> None
+```
+<ParamField path="url" type="string" required>
+  The URL to navigate to
+</ParamField>
+
+## click
+Click on an element on the page using a natural language description.
+
+```python
+def click(self, element_description: str, annotate: bool = False) -> None
+```
+<ParamField path="element_description" type="string" required>
+  Natural language description of the element to click
+</ParamField>
+<ParamField path="annotate" type="bool" optional>
+  Optionally annotate the element on the browser
+</ParamField>
+
+## type
+Type text into an input field using a natural language description.
+
+```python
+def type(self, text: str) -> None
+```
+<ParamField path="text" type="string" required>
+  The text to type into the input field
+</ParamField>
+
+## press_enter
+Press the enter key on the keyboard.
+
+```python
+def press_enter(self) -> None
+```
+
+## scroll
+Scroll the page by a specified number of pixels.
+
+```python
+def scroll(self, scroll_amount: int) -> None
+```
+<ParamField path="scroll_amount" type="int" required>
+  The amount of pixels to scroll by
+</ParamField>
+
+## wait
+Wait for a specified amount of time.
+
+```python
+def wait(self, wait_time: int) -> None
+```
+<ParamField path="wait_time" type="int" required>
+  The amount of time to wait in seconds
+</ParamField>

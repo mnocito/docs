@@ -43,16 +43,18 @@
     {
       "group": "SDK Reference",
       "pages": [
-        {
-          "group": "Simplex Client",
-          "pages": [
             "sdk-reference/constructor",
             "sdk-reference/actions",
-            "sdk-reference/extractors"
-          ]
-        },
+            {
+              "group": "Extractors",
+              "pages": [
+                "sdk-reference/extract-bbox",
+                "sdk-reference/extract-text",
+                "sdk-reference/extract-image"
+              ]
+            },
         {
-          "group": "Code Examples",
+          "group": "Examples",
           "pages": [
             "examples/search",
             "examples/extract"
@@ -70,6 +72,11 @@
   "api": {
     "playground": {
       "mode": "hide"
+    }
+  },
+  "style": {
+    "spacing": {
+      "compact": true
     }
   }
 } 

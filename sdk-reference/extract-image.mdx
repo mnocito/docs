@@ -1,0 +1,42 @@
+---
+title: 'Extract image'
+description: 'Extract an image from the screen given a natural language description. Useful for extracting graphs, charts, etc...'
+---
+
+## extract_image
+```python
+def extract_image(self, element_description: str, state: Image.Image | None = None, annotate: bool = True) -> Image.Image:
+```
+
+<ParamField path="element_description" type="string" required>
+  Natural language description of the element to extract text from
+</ParamField>
+
+<ParamField path="state" type="Image.Image">
+  Screenshot of the current screen. If not provided, a new screenshot of the browserwill be taken.
+</ParamField>
+
+<ParamField path="annotate" type="boolean" default="True">
+  Optionally annotate the element on the browser
+</ParamField>
+
+<ResponseField name="return" type="Image.Image">
+  An image of the element matching the description. This image is based on whatever is currently visible on the screen.
+</ResponseField>
+
+## Sample Usage
+Let's say we're building a report for NVIDIA's latest stock trends and have navigated to see NVIDIA's stock trends
+on google.
+
+![NVIDIA stock trends](/images/nvidia-stock.png)
+
+We can extract their stock trends chart to an image to add to our report like this:
+
+```python
+image = client.extract_image("stock trends and market summary")
+```
+
+The output image will look like this:
+
+![NVIDIA stock trends](/images/nvidia-stock-extracted.png)
+

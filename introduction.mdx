@@ -16,42 +16,6 @@ Then, just run
 pip install simplex
 ```
 
-## Examples
-Automate finding 3D assets from the CGTrader website.
-```python
-# Example workflow
-urls = []
-assets = ["apple watch", "victorian chair"]
-
-simplex = Simplex(api_key=os.getenv("SIMPLEX_API_KEY"), driver=driver)
-simplex.goto("https://www.cgtrader.com/")
-
-for asset in assets:
-    simplex.goto("https://www.cgtrader.com")
-    simplex.do(f"search for {asset}")  
-    simplex.do("click on search button")
-    simplex.do(f"click on the first product")
-    urls.append(simplex.driver.url)
-```
-
-or perform lower level actions 
-```python
-from simplex import Simplex
-
-# Initialize the Simplex client
-simplex = Simplex(api_key="your-api-key")
-
-# Navigate to a page
-simplex.goto("https://news.ycombinator.com/show")
-
-# Find an element on the page
-simplex.find_element("submit button")
-
-# or get a trajectory for a small task # i think people won't understand this without more context :(
-actions = simplex.step_to_action("click on the top post")
-
-
-
-``` 
+ 
 
 

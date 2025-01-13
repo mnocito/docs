@@ -1,0 +1,43 @@
+---
+title: 'Extract text'
+description: 'Get text from the screen given a natural language description.'
+---
+
+## extract_text
+```python
+def extract_text(self, element_description: str, state: Image.Image | None = None, annotate: bool = True) -> list[str]:
+```
+
+<ParamField path="element_description" type="string" required>
+  Natural language description of the element to extract text from
+</ParamField>
+
+<ParamField path="state" type="Image.Image">
+  Screenshot of the current screen. If not provided, a new screenshot of the browserwill be taken.
+</ParamField>
+
+<ParamField path="annotate" type="boolean" default="True">
+  Optionally annotate the element on the browser
+</ParamField>
+
+<ResponseField name="return" type="list[str]">
+  List of extracted text strings within the matching element. 
+  If there are multiple lines of text within the element, this will return a list of all those strings.
+</ResponseField>
+
+## Sample Usage
+Let's say our goal is to purchase thousands of 3D assets. 
+We only want to purchase assets that have a license that allows AI use. 
+
+Here's a sample product:
+![3D asset product](/images/airplane_asset.png)
+
+
+We can extract the license text to check if it allows AI use.
+```python
+text = client.extract_text("type of license")
+
+if "No Ai" not in text[0]:
+    client.click("add to cart")
+```
+

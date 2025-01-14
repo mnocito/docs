@@ -53,13 +53,7 @@
                 "sdk-reference/extract-image"
               ]
             },
-        {
-          "group": "Examples",
-          "pages": [
-            "examples/search",
-            "examples/extract"
-          ]
-        }
+            "examples/example"
       ]
     },
     {

@@ -4,37 +4,33 @@ description: 'Locate an element based on a natural language description'
 api: 'POST /find-element'
 ---
 
-This endpoint takes a screenshot and a natural language description of an element, and returns the bounding box coordinates of the matching element. Coordinates are in pixels relative to the top-left corner of the image.
+Takes in a screenshot and a natural language description of an element and returns the element's bounding box coordinates. Coordinates are in pixels. The origin is the top-left corner of the image.
 
+Bearer token authentication is required.
 ### Request
 
 <ParamField body="element_description" type="string" required>
-  Natural language description of the element to find (e.g. "Login button", "Email input field")
+  Natural language description of the element to find (e.g. "login button", "email input field")
 </ParamField>
 
 <ParamField body="image_data" type="file" required>
   Screenshot image file in PNG or JPEG format
 </ParamField>
 
-<ParamField body="api_key" type="string" required>
-  Your API key for authentication
-</ParamField>
-
 ### Example Request
 
 ```bash
 curl -X POST https://api.simplex.sh/find-element \
-  -F "element_description=Login button" \
+  -F "element_description=login button" \
   -F "image_data=@screenshot.png" \
-  -F "api_key=your_api_key"
 ```
 
 ### Example Response
 
 ```json
 {
-  "x1": 100,
-  "y1": 200,
-  "x2": 200,
-  "y2": 250
+  "x1": 107,
+  "y1": 264,
+  "x2": 231,
+  "y2": 290
 }

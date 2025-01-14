@@ -13,7 +13,7 @@ def extract_text(self, element_description: str, state: Image.Image | None = Non
 </ParamField>
 
 <ParamField path="state" type="Image.Image">
-  Screenshot of the current screen. If not provided, a new screenshot of the browserwill be taken.
+  Screenshot of the current screen. If not provided, a new screenshot of the browser will be taken.
 </ParamField>
 
 <ParamField path="annotate" type="boolean" default="True">
@@ -22,14 +22,14 @@ def extract_text(self, element_description: str, state: Image.Image | None = Non
 
 <ResponseField name="return" type="list[str]">
   List of extracted text strings within the matching element. 
-  If there are multiple lines of text within the element, this will return a list of all those strings.
+  If there are multiple chunks of text within the element, this will return a list of all those strings.
 </ResponseField>
 
 ## Sample Usage
 Let's say our goal is to purchase thousands of 3D assets. 
 We only want to purchase assets that have a license that allows AI use. 
 
-Here's a sample product:
+Here's a sample product from cgtrader.com (an asset marketplace):
 ![3D asset product](/images/airplane_asset.png)
 
 

@@ -1,6 +1,6 @@
 ---
 title: 'Actions'
-description: 'Use playwright and some AI to perform actions on the page'
+description: 'Use  AI to perform actions on the page'
 ---
 
 ## goto
@@ -10,7 +10,7 @@ Navigate to a specific URL.
 def goto(self, url: str) -> None
 ```
 <ParamField path="url" type="string" required>
-  The URL to navigate to
+  The URL to navigate to.
 </ParamField>
 
 ## click
@@ -23,7 +23,7 @@ def click(self, element_description: str, annotate: bool = False) -> None
   Natural language description of the element to click
 </ParamField>
 <ParamField path="annotate" type="bool" optional>
-  Optionally annotate the element on the browser
+  Puts a blue border around the browser element when 
 </ParamField>
 
 ## type

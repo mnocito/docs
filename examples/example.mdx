@@ -24,13 +24,14 @@ We'll then use this search function to navigate to `mitchellh`'s GitHub profile 
 ```python
 github_profile = "mitchellh"
 search("https://google.com", f"{github_profile} github")
+simplex.wait(3000)     # add a wait for the page to load
 simplex.click("the first search result link")
 # The graph isn't fully visible on page load, so we have to scroll 200px.
 simplex.scroll(200)
 # Since we use vision language models, sometimes you have to play 
 # around with prompting to get the right image.
-# In this case, "calendar graph" worked well.
-image = simplex.extract_image("calendar graph")
+# In this case, "green tile graph" worked well across profiles.
+image = simplex.extract_image("green tile graph")
 ```
 
 ### Result

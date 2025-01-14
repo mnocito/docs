@@ -1,16 +1,15 @@
 ---
-title: 'Example: Extract GitHub Contribution Graph'
-description: 'Get a github contribution graph from a profile'
+title: 'Full Example: Extract GitHub Contribution Graph'
+description: ''
 ---
 
-We're looking to write an automation that gets images of a github contribution graph from a github profile.
+Here's how to write an automation that extracts an image of a GitHub contribution graph from a GitHub profile.
 
-To start, let's create a function that can search a query on almost any website.
+To start, let's create our search function.
 
 ```python search.py
 from simplex import Simplex
-simplex = Simplex(api_key="api_key")
-
+simplex = Simplex(api_key="your_api_key")
 
 def search(website, search_query):
     simplex.goto(website)
@@ -20,18 +19,22 @@ def search(website, search_query):
 
 ```
 
-We'll then use this search function to navigate to potential hires' github profiles and call the `extract_image` function to get the contribution graph.
+We'll then use this search function to navigate to `mitchellh`'s GitHub profile and call the `extract_image` function to get the contribution graph.
 
 ```python
-simplex = Simplex(os.getenv("SIMPLEX_API_KEY"))
-
-report = {}
-for hire in potential_hires:
-    search("https://google.com", f"{hire} github")
-    simplex.click("the first search result link")
-    simplex.scroll(200)
-    # Since we use vision language models, sometimes 
-    image = simplex.extract_image("calendar graph")
-    report[hire] = image
-
+github_profile = "mitchellh"
+search("https://google.com", f"{github_profile} github")
+simplex.click("the first search result link")
+# The graph isn't fully visible on page load, so we have to scroll 200px.
+simplex.scroll(200)
+# Since we use vision language models, sometimes you have to play 
+# around with prompting to get the right image.
+# In this case, "calendar graph" worked well.
+image = simplex.extract_image("calendar graph")
 ```
+
+### Result
+
+![GitHub Contribution Graph](/images/github-contribution-graph.png)
+
+That's a lot of contributions!

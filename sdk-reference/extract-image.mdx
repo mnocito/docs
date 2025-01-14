@@ -1,15 +1,20 @@
 ---
 title: 'Extract image'
-description: 'Extract an image from the screen given a natural language description. Useful for extracting graphs, charts, etc...'
+description: 'Extract an image from the screen given a natural language description. Useful for extracting graphs, logos, or images of text.'
 ---
 
 ## extract_image
 ```python
-def extract_image(self, element_description: str, state: Image.Image | None = None, annotate: bool = True) -> Image.Image:
+def extract_image(
+    self,
+    element_description: str,
+    state: PIL.Image | None = None,
+    annotate: bool = True
+) -> PIL.Image:
 ```
 
 <ParamField path="element_description" type="string" required>
-  Natural language description of the element to extract text from
+  Natural language description of the element to extract.
 </ParamField>
 
 <ParamField path="state" type="Image.Image">
@@ -17,23 +22,26 @@ def extract_image(self, element_description: str, state: Image.Image | None = No
 </ParamField>
 
 <ParamField path="annotate" type="boolean" default="True">
-  Optionally annotate the element on the browser
+  Whether to annotate the element on the browser.
 </ParamField>
 
 <ResponseField name="return" type="Image.Image">
-  An image of the element matching the description. This image is based on whatever is currently visible on the screen.
+  An image of the element matching the description. This image is based on what's currently visible on the screen and can depend on the browser's resolution.
 </ResponseField>
 
 ## Sample Usage
-Let's say we're building a report for NVIDIA's latest stock trends and have navigated to see NVIDIA's stock trends
-on google.
+In this example, we're building a report for NVIDIA's latest stock trends and have navigated to see NVIDIA's stock trends
+on Google.
 
 ![NVIDIA stock trends](/images/nvidia-stock.png)
 
-We can extract their stock trends chart to an image to add to our report like this:
+We can extract NVIDIA's stock trends chart to an image to add to our report like this:
 
 ```python
-image = client.extract_image("stock trends and market summary")
+from simplex import Simplex
+simplex = Simplex(api_key="your_api_key")
+simplex.goto("https://www.google.com/search?q=nvidia+stock")
+image = simplex.extract_image("stock trends and market summary")
 ```
 
 The output image will look like this:

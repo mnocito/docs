@@ -1,8 +1,8 @@
 ---
 title: 'Actions'
-description: 'Use  AI to perform actions on the page'
+description: 'Perform actions on the page with natural language.'
 ---
-
+All of these functions are avaliable on the `Simplex` class.
 ## goto
 Navigate to a specific URL.
 
@@ -12,53 +12,103 @@ def goto(self, url: str) -> None
 <ParamField path="url" type="string" required>
   The URL to navigate to.
 </ParamField>
+### Example Usage
+
+```python
+from simplex import Simplex
+simplex = Simplex(api_key="your_api_key")
+simplex.goto("https://www.google.com")
+```
 
 ## click
 Click on an element on the page using a natural language description.
 
 ```python
-def click(self, element_description: str, annotate: bool = False) -> None
+def click(self, element_description: str, annotate: bool = True) -> None
 ```
 <ParamField path="element_description" type="string" required>
-  Natural language description of the element to click
+  Natural language description of the element to click.
 </ParamField>
-<ParamField path="annotate" type="bool" optional>
-  Puts a blue border around the browser element when 
+<ParamField path="annotate" type="boolean" default="True">
+  Whether to annotate the element on the browser.
 </ParamField>
+
+### Example Usage
+```python
+from simplex import Simplex
+simplex = Simplex(api_key="your_api_key")
+simplex.goto("https://www.google.com")
+simplex.click("the search bar")
+```
 
 ## type
 Type text into an input field using a natural language description.
 
 ```python
-def type(self, text: str) -> None
+def type(text: str) -> None
 ```
 <ParamField path="text" type="string" required>
-  The text to type into the input field
+  The text to type into the input field.
 </ParamField>
+
+### Example Usage
+```python
+from simplex import Simplex
+simplex = Simplex(api_key="your_api_key")
+simplex.goto("https://www.google.com")
+simplex.click("the search bar")
+simplex.type("hashicorp stock")
+```
 
 ## press_enter
 Press the enter key on the keyboard.
 
 ```python
-def press_enter(self) -> None
+def press_enter() -> None
+```
+
+### Example Usage
+```python
+from simplex import Simplex
+simplex = Simplex(api_key="your_api_key")
+simplex.goto("https://www.google.com")
+simplex.click("the search bar")
+simplex.type("hashicorp stock")
+simplex.press_enter()
 ```
 
 ## scroll
 Scroll the page by a specified number of pixels.
 
 ```python
-def scroll(self, scroll_amount: int) -> None
+def scroll(scroll_amount: int) -> None
 ```
 <ParamField path="scroll_amount" type="int" required>
-  The amount of pixels to scroll by
+  The amount of pixels to scroll by.
 </ParamField>
+
+### Example Usage
+```python
+from simplex import Simplex
+simplex = Simplex(api_key="your_api_key")
+simplex.goto("https://www.github.com/bensmidt")
+simplex.scroll(200)
+```
 
 ## wait
 Wait for a specified amount of time.
 
 ```python
-def wait(self, wait_time: int) -> None
+def wait(wait_time: int) -> None
 ```
 <ParamField path="wait_time" type="int" required>
-  The amount of time to wait in seconds
+  The amount of time to wait in milliseconds.
 </ParamField>
+
+### Example Usage
+```python
+from simplex import Simplex
+simplex = Simplex(api_key="your_api_key")
+simplex.goto("https://www.google.com")
+simplex.wait(1000)
+```

@@ -48,7 +48,7 @@
             {
               "group": "Extractors",
               "pages": [
-                "sdk-reference/extract-bbox",
+                "sdk-reference/extract-bounding-box",
                 "sdk-reference/extract-text",
                 "sdk-reference/extract-image"
               ]

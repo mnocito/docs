@@ -5,11 +5,16 @@ description: 'Get text from the screen given a natural language description.'
 
 ## extract_text
 ```python
-def extract_text(self, element_description: str, state: Image.Image | None = None, annotate: bool = True) -> list[str]:
+def extract_text(
+    self,
+    element_description: str,
+    state: PIL.Image | None = None,
+    annotate: bool = True
+) -> List[str]:
 ```
 
 <ParamField path="element_description" type="string" required>
-  Natural language description of the element to extract text from
+  Natural language description of the element to extract.
 </ParamField>
 
 <ParamField path="state" type="Image.Image">
@@ -17,27 +22,30 @@ def extract_text(self, element_description: str, state: Image.Image | None = Non
 </ParamField>
 
 <ParamField path="annotate" type="boolean" default="True">
-  Optionally annotate the element on the browser
+  Whether to annotate the element on the browser.
 </ParamField>
 
-<ResponseField name="return" type="list[str]">
+<ResponseField name="return" type="List[str]">
   List of extracted text strings within the matching element. 
-  If there are multiple chunks of text within the element, this will return a list of all those strings.
+  If there are multiple chunks of text within the element, this will return a list of all those chunks.
 </ResponseField>
 
 ## Sample Usage
-Let's say our goal is to purchase thousands of 3D assets. 
-We only want to purchase assets that have a license that allows AI use. 
+In this example, we're building a script to purchase 3D models from CGTrader (a 3D design marketplace) for a synthetic data project.
+Since we want to use this asset for creating synthetic data, we need to check if the license allows AI use.
 
-Here's a sample product from cgtrader.com (an asset marketplace):
+Here's a sample product page (license highlighted in green):
 ![3D asset product](/images/airplane_asset.png)
 
 
 We can extract the license text to check if it allows AI use.
-```python
-text = client.extract_text("type of license")
 
-if "No Ai" not in text[0]:
-    client.click("add to cart")
+```python
+from simplex import Simplex
+simplex = Simplex(api_key="your_api_key")
+simplex.goto("https://www.cgtrader.com/3d-models/aircraft/commercial-aircraft/boeing-787-8-5f56fa4f-4ca5-42b8-9ffa-154fb2215928")
+text = simplex.extract_text("type of license")
+if "no ai" not in text[0].lower():
+    simplex.click("add to cart")
 ```
 

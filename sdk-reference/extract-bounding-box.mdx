@@ -1,15 +1,20 @@
 ---
-title: 'Extract element'
+title: 'Extract bounding box'
 description: 'Find the bounding box of an element given a natural language description.'
 ---
 
 ## extract_bbox
 ```python
-def extract_bbox(self, element_description: str, state: Image.Image | None = None, annotate: bool = True) -> list[int]:
+def extract_bbox(
+    self,
+    element_description: str,
+    state: PIL.Image | None = None,
+    annotate: bool = True
+) -> List[int]:
 ```
 
 <ParamField path="element_description" type="string" required>
-  Natural language description of the element to extract
+  Natural language description of the element to extract.
 </ParamField>
 
 <ParamField path="state" type="Image.Image">
@@ -17,10 +22,10 @@ def extract_bbox(self, element_description: str, state: Image.Image | None = Non
 </ParamField>
 
 <ParamField path="annotate" type="boolean" default="True">
-  Optionally annotate the element on the browser
+  Whether to annotate the element on the browser.
 </ParamField>
 
-<ResponseField name="return" type="list[int]">
+<ResponseField name="return" type="List[int, int, int, int]">
   List of 4 integers representing the bounding box of the element.
   The order is [x1, y1, x2, y2] where (x1, y1) is the top-left corner and (x2, y2) is the bottom-right corner.
 </ResponseField>
